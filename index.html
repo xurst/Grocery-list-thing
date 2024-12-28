@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>xurst's grocery picker</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&di?o98splay=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+  <h1 class="title">xurst's grocery picker</h1>
+
+  <div id="loginSection">
+    <div class="box main-box">
+      <button id="loginButton" class="input-field">sign in with google</button>
+    </div>
+  </div>
+
+  <div id="grocerySection" class="hidden">
+    <h2 class="section-title">must have items</h2>
+    <div class="box list-box">
+      <div class="input-field" id="absoluteItems">
+        loading absolute items...
+      </div>
+      <button class="copy-button" data-source="absoluteItems">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+        </svg>
+      </button>
+    </div>
+
+    <h2 class="section-title">this week's items</h2>
+    <div class="box list-box">
+      <div class="input-field" id="weeklyItems">
+        loading weekly items...
+      </div>
+      <button class="copy-button" data-source="weeklyItems">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+        </svg>
+      </button>
+    </div>
+
+    <div class="button-row">
+      <div class="box main-box">
+        <button id="regenerateButton" class="input-field">generate new items</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://apis.google.com/js/api.js"></script>
+<script src="https://accounts.google.com/gsi/client"></script>
+<script src="main.js"></script>
+<script>
+  window.onload = function() {
+    window.gapiLoaded();
+    window.gisLoaded();
+  }
+</script>
+</body>
+</html>
