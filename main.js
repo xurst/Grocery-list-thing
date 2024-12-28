@@ -18,8 +18,6 @@ window.gisLoaded = () => {
         client_id: CLIENT_ID,
         scope: SCOPES,
         callback: handleAuthResponse,
-        redirect_uri: 'https://xurst.github.io/grocery-list-thing',
-        hosted_domain: 'xurst.github.io'
     });
     gisInited = true;
     maybeEnableButtons();
