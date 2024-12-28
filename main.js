@@ -38,7 +38,7 @@ async function initializeGapiClient() {
 
 function maybeEnableButtons() {
     if (gapiInited && gisInited) {
-        document.getElementById('loginButton').disabled = false;
+        document.getElementById(CONFIG.DOM_IDS.LOGIN_BUTTON).disabled = false;
     }
 }
 
@@ -48,8 +48,8 @@ async function handleAuthResponse(response) {
     }
     try {
         await loadGroceryList();
-        document.getElementById('loginSection').classList.add('hidden');
-        document.getElementById('grocerySection').classList.remove('hidden');
+        document.getElementById(CONFIG.DOM_IDS.LOGIN_SECTION).classList.add('hidden');
+        document.getElementById(CONFIG.DOM_IDS.GROCERY_SECTION).classList.remove('hidden');
     } catch (err) {
         console.error(err);
     }
@@ -81,7 +81,7 @@ async function loadGroceryList() {
         const lines = content.split('\n').map(line => line.trim()).filter(Boolean);
 
         const absoluteSectionStart = lines.findIndex(line =>
-            line.includes('(items that i absolutely want)'));
+            line.includes(CONFIG.SECTIONS.ABSOLUTE_MARKER));
 
         const firstWeeklyItem = lines.findIndex((line, index) =>
             index > absoluteSectionStart + 2 &&
@@ -97,7 +97,7 @@ async function loadGroceryList() {
                 .filter(Boolean);
         }
 
-        const containerSectionStart = lines.findIndex(line => line === 'Container');
+        const containerSectionStart = lines.findIndex(line => line === CONFIG.SECTIONS.CONTAINER_MARKER);
         if (containerSectionStart !== -1) {
             containerItems = lines
                 .slice(containerSectionStart + 2)
@@ -116,20 +116,20 @@ async function loadGroceryList() {
         generateNewList();
     } catch (err) {
         console.error('Detailed error:', err);
-        document.getElementById('weeklyItems').innerHTML = `Error: ${err.message}`;
-        document.getElementById('absoluteItems').innerHTML = `Error: ${err.message}`;
+        document.getElementById(CONFIG.DOM_IDS.WEEKLY_ITEMS).innerHTML = `Error: ${err.message}`;
+        document.getElementById(CONFIG.DOM_IDS.ABSOLUTE_ITEMS).innerHTML = `Error: ${err.message}`;
     }
 }
 
 function generateNewList() {
-    const absoluteItemsElement = document.getElementById('absoluteItems');
+    const absoluteItemsElement = document.getElementById(CONFIG.DOM_IDS.ABSOLUTE_ITEMS);
     if (absoluteItems.length === 0) {
         absoluteItemsElement.innerHTML = 'No must-have items';
     } else {
         absoluteItemsElement.innerHTML = absoluteItems.map((item, index) => `${index + 1}: ${item}`).join('\n');
     }
 
-    const weeklyItems = document.getElementById('weeklyItems');
+    const weeklyItems = document.getElementById(CONFIG.DOM_IDS.WEEKLY_ITEMS);
     if (containerItems.length === 0) {
         weeklyItems.innerHTML = 'No items available';
         return;
@@ -142,7 +142,7 @@ function generateNewList() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('loginButton').addEventListener('click', handleAuthClick);
+    document.getElementById(CONFIG.DOM_IDS.LOGIN_BUTTON).addEventListener('click', handleAuthClick);
     document.getElementById('regenerateButton').addEventListener('click', generateNewList);
 
     document.querySelectorAll('.copy-button').forEach(button => {
