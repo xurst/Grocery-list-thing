@@ -9,8 +9,6 @@ let tokenClient;
 let gapiInited = false;
 let gisInited = false;
 
-// skibidi
-
 window.gapiLoaded = () => {
     gapi.load('client', initializeGapiClient);
 };
