@@ -52,14 +52,19 @@
   </div>
 </div>
 
-<script src="https://apis.google.com/js/api.js"></script>
-<script src="https://accounts.google.com/gsi/client"></script>
-<script src="main.js"></script>
-<script>
-  window.onload = function() {
-    window.gapiLoaded();
-    window.gisLoaded();
-  }
+<script src="https://apis.google.com/js/api.js" defer></script>
+<script src="https://accounts.google.com/gsi/client" defer></script>
+<script src="config.js" defer></script>
+<script src="main.js" defer></script>
+<script defer>
+  window.addEventListener('load', function() {
+    if (window.gapiLoaded) {
+      window.gapiLoaded();
+      window.gisLoaded();
+    } else {
+      console.error('Google API not loaded properly');
+    }
+  });
 </script>
 </body>
 </html>
